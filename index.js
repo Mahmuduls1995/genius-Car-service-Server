@@ -22,7 +22,11 @@ async function run() {
         await client.connect();
         const serviceCollection = client.db('geniusCar').collection('service');
         const orderCollection = client.db('geniusCar').collection('order');
-       
+        
+        // const database = client.db("sample_mflix");
+        // const movies = database.collection("movies");
+        // query for movies that have a runtime less than 15 minutes
+        // const query = { runtime: { $lt: 15 } };
 
         function verifyJWT(req, res, next) {
             const authHeader = req.headers.authorization;
@@ -42,7 +46,7 @@ async function run() {
 
 
 
-        //Auth complete
+        //Auth
         app.post('/login', async (req, res) => {
             const user = req.body;
             const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
@@ -119,6 +123,9 @@ run().catch(console.dir);
 
 app.get('/', (req, res) => {
     res.send('Running Genius Server');
+});
+app.get('/hero', (req, res) => {
+    res.send('Hero Meets HeroKu');
 });
 
 app.listen(port, () => {
